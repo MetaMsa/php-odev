@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = filter_var($_POST['namereg'], FILTER_SANITIZE_STRING);
     $email = filter_var($_POST['emailreg'], FILTER_SANITIZE_EMAIL);
     $date = filter_var($_POST['datereg'], FILTER_SANITIZE_STRING);
-    $password = filter_var($_POST['datereg'], FILTER_SANITIZE_STRING);;  
+    $password = filter_var($_POST['passwordreg'], FILTER_SANITIZE_STRING);;  
 
     $conn = new PDO("mysql:host=$_ENV[MYSQL_DB_HOST];dbname=$_ENV[MYSQL_DB_NAME]", $_ENV['MYSQL_DB_USER_NAME'], $_ENV['MYSQL_DB_PASSWORD']);
 
