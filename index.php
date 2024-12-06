@@ -4,60 +4,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <title>Ana Sayfa</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="">
+    <script type="text/javascript" src="index.js"></script>
+    <script src="https://kit.fontawesome.com/28825630fd.js" crossorigin="anonymous"></script>
 </head>
 
-<body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3 text-center">
+<body class="w3-green">
+    <center>
+        <header>
+            <div class="w3-panel w3-red w3-xxlarge w3-serif"><i>Dershane İşlemleri Yönetim Sistemi</i></div>
+        </header>
+        <main>
+            <div style="width: fit-content;" class="login w3-card-4 w3-border w3-border-black w3-round w3-animate-zoom" id="login">
+                <div class="w3-container w3-blue">
+                    <h1>Giriş</h1>
+                </div>
+                <form class="w3-container w3-white w3-padding-16" action="login.php" method="post">
+                    <div>
+                        <label for="name">Kullanıcı Adı</label><br>
+                        <input class="w3-input w3-hover-yellow w3-animate-input" type="text" id="name" name="name" style="width:50%" required>
+                    </div>
+                    <div>
+                        <label for="password">Şifre</label><br>
+                        <input class="w3-input w3-hover-yellow w3-animate-input" type="password" id="password" name="password" style="width:50%" required>
+                    </div><br>
+                    <button type="submit" class="w3-button w3-green w3-border w3-border-red w3-round-large">
+                        <i class="fa-solid fa-right-to-bracket">
 
+                        </i>
+                        Giriş Yap</button>
+                </form>
+                <div class="error w3-red">
+                    <?php
+                    if (isset($_GET["state"]) && $_GET["state"] == "error") {
+                        echo "<p>Kullanıcı adı veya şifre hatalı!</p>";
+                    }
+                    if (isset($_GET["state"]) && $_GET["state"] == "regerror") {
+                        echo "Bu kullanıcı adı zaten kullanımda!";
+                    }
+                    ?>
+                </div>
+                <div class="success">
+                    <?php
+                    if (isset($_GET["state"]) && $_GET["state"] == "regsuccess") {
+                    echo "Kayıt başarılı!";
+                    }
+                    ?>
+                </div>
             </div>
 
-            <div class="col-md-6 text-center">
-                <h1>Giriş</h1>
-                <form action="index.php" method="post">
-                    <div class="m-5 p-5">
-                        <label for="name" class="form-label">Kullanıcı Adı</label>
-                        <input type="text" class="form-control" id="name" name="name">
+            <div style="width: fit-content; display:none;" class="register w3-card-4 w3-border w3-border-black w3-round w3-animate-zoom" id="register">
+                <div class="w3-container w3-cyan">
+                    <h1>Kayıt Ol</h1>
+                </div>
+                <form class="w3-container w3-white w3-padding-16" action="register.php" method="post">
+                    <div>
+                        <label for="namereg">Kullanıcı Adı</label><br>
+                        <input class="w3-input w3-hover-yellow w3-animate-input" type="text" id="namereg" name="namereg" style="width:50%" required>
                     </div>
-                    <div class="m-5 p-5">
-                        <label for="password" class="form-label">Şifre</label>
-                        <input type="password" class="form-control" id="password" name="password">
+                    <div>
+                        <label for="emailreg">E-Posta</label><br>
+                        <input class="w3-input w3-hover-yellow w3-animate-input" type="email" id="emailreg" name="emailreg" style="width:50%" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Giriş Yap</button>
+                    <div>
+                        <label for="datereg">Doğum Tarihi</label><br>
+                        <input class="w3-input w3-hover-yellow w3-animate-input" type="date" id="datereg" name="datereg" style="width:50%" required>
+                    </div>
+                    <div>
+                        <label for="passwordreg">Şifre</label><br>
+                        <input class="w3-input w3-hover-yellow w3-animate-input" type="password" id="passwordreg" name="passwordreg" style="width:50%" required>
+                    </div><br>
+                    <button type="submit" class="w3-button w3-green w3-border w3-border-red w3-round-large">
+                        <i class="fa-solid fa-user-plus">
+
+                        </i>
+                        Kayıt Ol</button>
                 </form>
             </div>
+            <button id="btn" class="w3-button w3-yellow" onclick="change()">
+                Kayıt Ol
+            </button>
+        </main>
+        <footer class="w3-display-bottommiddle">
 
-            <div class="col-md-3 text-center">
-
-            </div>
-        </div>
+        </footer>
+    </center>
 </body>
-
-<?php
-$servername = "sql103.infinityfree.com";
-$username = "if0_37485059";
-$password = "zoLDN1jlNtVU3al";
-$dbname = "if0_37485059_odev";
-
-$de_servername = "localhost";
-$de_username = "root";
-$de_password = "";
-$de_dbname = "if0_37485059_odev";
-
-try {
-    $conn = new PDO("mysql:host=$de_servername;dbname=$de_dbname", $de_username, $de_password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "<center> Bağlantı başarılı! </center>";
-} catch (PDOException $e) {
-    echo "<center> Bağlantı hatası: </center>" . $e->getMessage();
-}
-?>
 
 </html>
