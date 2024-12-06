@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST["name"];
     $password = $_POST["password"];
 
-    $conn = new PDO("mysql:host=$_ENV[DE_MYSQL_DB_HOST];dbname=$_ENV[DE_MYSQL_DB_NAME]", $_ENV['DE_MYSQL_DB_USER_NAME'], $_ENV['DE_MYSQL_DB_PASSWORD']);
+    $conn = new PDO("mysql:host=$_ENV[MYSQL_DB_HOST];dbname=$_ENV[MYSQL_DB_NAME]", $_ENV['MYSQL_DB_USER_NAME'], $_ENV['MYSQL_DB_PASSWORD']);
 
     // Prepare and execute the query with parameterized values
     $sql = "SELECT * FROM users WHERE name = ? AND password = ?";
