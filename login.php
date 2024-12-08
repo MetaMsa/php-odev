@@ -1,15 +1,3 @@
-Kodunuzdaki Güvenlik Açığı ve Düzeltme
-
-Verdiğiniz kodda, SQL injection açığı bulunmaktadır. Bu, kötü niyetli kullanıcıların SQL sorgularını manipüle ederek veritabanınıza erişmelerine veya verileri değiştirmelerine izin verebilir.
-
-Güvenlik Açığının Nedeni:
-
-Direct SQL Injection: Kullanıcı tarafından sağlanan $name ve $password değerleri doğrudan SQL sorgusuna ekleniyor. Bu, SQL injection saldırılarına açık hale getirir.
-Çözüm: Prepared Statements Kullanımı
-
-Prepared statements, SQL sorgularını ve verileri ayrı tutarak SQL injection riskini en aza indirir.
-
-PHP
 <?php
 require_once realpath(__DIR__ . "/vendor/autoload.php");
 
