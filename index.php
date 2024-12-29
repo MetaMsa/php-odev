@@ -4,12 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ana Sayfa</title>
+    <title>Giriş</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="">
     <script type="text/javascript" src="index.js"></script>
     <script src="https://kit.fontawesome.com/28825630fd.js" crossorigin="anonymous"></script>
+    <?php
+        session_start();
+        if(isset($_SESSION["name"]) && isset($_SESSION["roles"]) && $_SESSION["roles"] == "2"){
+            header("Location: admin.php");
+        }if(isset($_SESSION["name"]) && isset($_SESSION["roles"]) && $_SESSION["roles"] == "1"){
+            header("Location: teacher.php");
+        }
+    ?>
 </head>
 
 <body class="w3-green">
@@ -66,12 +74,23 @@
                         <input class="w3-input w3-hover-yellow w3-animate-input" type="text" id="namereg" name="namereg" style="width:50%" required>
                     </div>
                     <div>
-                        <label for="emailreg">E-Posta</label><br>
-                        <input class="w3-input w3-hover-yellow w3-animate-input" type="email" id="emailreg" name="emailreg" style="width:50%" required>
-                    </div>
-                    <div>
                         <label for="datereg">Doğum Tarihi</label><br>
                         <input class="w3-input w3-hover-yellow w3-animate-input" type="date" id="datereg" name="datereg" style="width:50%" required>
+                    </div>
+                    <div>
+                        <select class="w3-select w3-hover-yellow w3-animate-input" name="rolereg" id="rolereg" style="width:50%" required>
+                            <option value="" disabled selected>Rol Seçiniz...</option>
+                            <option value="1">Öğretmen</option>
+                            <option value="2">Yönetici</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="dershaneadreg">Dershane Adı</label><br>
+                        <input class="w3-input w3-hover-yellow w3-animate-input" type="text" id="dershaneadreg" name="dershaneadreg" style="width:50%" required>
+                    </div>
+                    <div>
+                        <label for="emailreg">E-Posta</label><br>
+                        <input class="w3-input w3-hover-yellow w3-animate-input" type="email" id="emailreg" name="emailreg" style="width:50%" required>
                     </div>
                     <div>
                         <label for="passwordreg">Şifre</label><br>

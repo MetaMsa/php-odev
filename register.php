@@ -1,30 +1,42 @@
 <?php
-require_once realpath(__DIR__ . "/vendor/autoload.php");
-
-use Dotenv\Dotenv;
-
-$dotenv = Dotenv::createImmutable(__DIR__);
-$dotenv->load();
-
+include "db.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = filter_var($_POST['namereg'], FILTER_SANITIZE_STRING);
+    $username = htmlspecialchars(trim($_POST['namereg']), ENT_QUOTES, 'UTF-8');
     $email = filter_var($_POST['emailreg'], FILTER_SANITIZE_EMAIL);
-    $date = filter_var($_POST['datereg'], FILTER_SANITIZE_STRING);
-    $password = filter_var($_POST['passwordreg'], FILTER_SANITIZE_STRING);;  
+    $date = htmlspecialchars(trim($_POST['datereg']), ENT_QUOTES, 'UTF-8');
+    $password = htmlspecialchars(trim($_POST['passwordreg']), ENT_QUOTES, 'UTF-8');
+    $roles = htmlspecialchars(trim($_POST['rolereg']), ENT_QUOTES, 'UTF-8');
+    $dershanead = htmlspecialchars(trim($_POST['dershaneadreg']), ENT_QUOTES, 'UTF-8');
 
-    $conn = new PDO("mysql:host=$_ENV[MYSQL_DB_HOST];dbname=$_ENV[MYSQL_DB_NAME]", $_ENV['MYSQL_DB_USER_NAME'], $_ENV['MYSQL_DB_PASSWORD']);
-
-    $sql = "SELECT * FROM users WHERE name = '$username'";
+    $sql = "SELECT * FROM users WHERE name = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->execute();
+    $stmt->execute([$username]);
     $result = $stmt->fetchAll();
 
     if (count($result) > 0) {
         header("Location: index.php?state=regerror");
     } else {
-        $sql = "INSERT INTO users (name, email, date, password) VALUES (?, ?, ?, ?)";
+        // Dershane adını dershaneler tablosuna ekleyin
+        $sql = "INSERT INTO dershaneler (name) VALUES (?)";
         $stmt = $conn->prepare($sql);
-        $stmt->execute([$username, $email, $date, $password]);
+        $stmt->execute([$dershanead]);
+
+        // Eklenen dershanenin ID'sini alın
+        $dershane_id = $conn->lastInsertId();
+        
+        if($roles == "1"){
+            $maas = 25000;
+        }
+        else if($roles == "2"){
+            $maas = 50000;
+        }
+
+        // Kullanıcıyı users tablosuna ekleyin
+        $sql = "INSERT INTO users (name, email, date, password, roles, dershane_id, maas) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$username, $email, $date, $password, $roles, $dershane_id, $maas]);
+
         header("Location: index.php?state=regsuccess");
     }
 }
+?>

@@ -1,28 +1,8 @@
-Kodunuzdaki Güvenlik Açığı ve Düzeltme
-
-Verdiğiniz kodda, SQL injection açığı bulunmaktadır. Bu, kötü niyetli kullanıcıların SQL sorgularını manipüle ederek veritabanınıza erişmelerine veya verileri değiştirmelerine izin verebilir.
-
-Güvenlik Açığının Nedeni:
-
-Direct SQL Injection: Kullanıcı tarafından sağlanan $name ve $password değerleri doğrudan SQL sorgusuna ekleniyor. Bu, SQL injection saldırılarına açık hale getirir.
-Çözüm: Prepared Statements Kullanımı
-
-Prepared statements, SQL sorgularını ve verileri ayrı tutarak SQL injection riskini en aza indirir.
-
-PHP
 <?php
-require_once realpath(__DIR__ . "/vendor/autoload.php");
-
-use Dotenv\Dotenv;
-
-$dotenv = Dotenv::createImmutable(__DIR__);
-$dotenv->load();
-
+include "db.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST["name"];
     $password = $_POST["password"];
-
-    $conn = new PDO("mysql:host=$_ENV[MYSQL_DB_HOST];dbname=$_ENV[MYSQL_DB_NAME]", $_ENV['MYSQL_DB_USER_NAME'], $_ENV['MYSQL_DB_PASSWORD']);
 
     // Prepare and execute the query with parameterized values
     $sql = "SELECT * FROM users WHERE name = ? AND password = ?";
@@ -32,9 +12,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (count($result) > 0) {
         session_start();
-        $_SESSION["name"] = $name;
-        header("Location: home.php");
+        $_SESSION["name"] = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
+        $_SESSION["roles"] = $result[0]["roles"];
+        $_SESSION["dershane_id"] = $result[0]["dershane_id"];
+        if($result[0]["roles"] == "2")
+            header("Location: admin.php");
+        else if($result[0]["roles"] == "1")
+            header("Location: teacher.php");
     } else {
         header("Location: index.php?state=error");
     }
 }
+?>
