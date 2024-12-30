@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giriş</title>
+    <title>Öğrenci Kaydı</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="">
@@ -74,7 +74,7 @@
                 }
             }
 
-            $sql = "INSERT INTO students (Ad, Sınıf, ücret, dershane_id) VALUES (?, ?, ?, ?)";
+            $sql = "INSERT INTO students (Ad, Sinif, ucret, dershane_id) VALUES (?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
             $stmt->execute([$name, $option, $ücret, $_SESSION["dershane_id"]]);
             echo "<div class='w3-display-bottommiddle w3-panel w3-green w3-border w3-border-red w3-round-large' style='width: fit-content;'><p>Kayıt başarılı!</p></div>";

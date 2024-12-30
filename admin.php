@@ -35,7 +35,7 @@
 <body class="w3-green">
     <header>
         <center>
-            <div class="w3-panel w3-red w3-xxlarge w3-serif"><i>Dershane İşlemleri Yönetim Sistemi</i></div>
+            <div class="w3-panel w3-red w3-xxlarge w3-serif"><i>Dershane İşlemleri Yönetim Sistemi Yönetici Paneli</i></div>
             <div class="w3-bar w3-black">
                 <a href="" class="w3-bar-item w3-button w3-mobile w3-gray">Ana Sayfa</a>
                 <a href="./logout.php" class="w3-bar-item w3-button w3-mobile w3-red">Çıkış Yap <i class="fa fa-times"></i></a>
@@ -95,14 +95,14 @@
                     </h3>
                     <i class='fa fa-user'></i>
                     <h4>
-                        " . $row['Sınıf'] . ". Sınıf
+                        " . $row['Sinif'] . ". Sınıf
                     </h4>
                     <h5>
                        Öğrenci Numarası: " . $row['ID'] . "
                     </h5>
                     <h6>
                         <i class='fa fa-money'></i>
-                        Kayıt Ücreti: " . $row['ücret'] . "
+                        Kayıt Ücreti: " . $row['ucret'] . "
                     </h6>
                     <a href='./deletestudent.php?id=" . $row['ID'] . "' class='w3-button w3-red w3-border w3-border-black w3-round-large'>
                         <i class='fa fa-trash'></i>

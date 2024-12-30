@@ -107,8 +107,8 @@
                 Kayıt Ol
             </button>
         </main>
-        <footer class="w3-display-bottommiddle">
-
+        <footer class="w3-display-bottommiddle w3-mobile w3-xlarge w3-serif w3-text-black">
+            Mehmet Serhat ASLAN
         </footer>
     </center>
 </body>

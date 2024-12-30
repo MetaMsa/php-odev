@@ -35,24 +35,42 @@
 <body class="w3-green">
     <header>
         <center>
-            <div class="w3-panel w3-red w3-xxlarge w3-serif"><i>Dershane İşlemleri Yönetim Sistemi</i></div>
+            <div class="w3-panel w3-red w3-xxlarge w3-serif"><i>Dershane İşlemleri Yönetim Sistemi Öğretmen Paneli</i></div>
             <div class="w3-bar w3-black">
                 <a href="" class="w3-bar-item w3-button w3-mobile">Ana Sayfa</a>
                 <a href="./logout.php" class="w3-bar-item w3-button w3-mobile w3-red">Çıkış Yap <i class="fa fa-times"></i></a>
-                <a href="./NotGirişi.php" class="w3-bar-item w3-button w3-mobile"><?php echo $page[0]; ?></a>
-                <a href="./MaaşTakibi.php" class="w3-bar-item w3-button w3-mobile"><?php echo $page[1]; ?></a>
+                <a href="./MaaşTakibi.php" class="w3-bar-item w3-button w3-mobile"><?php echo $page[0]; ?></a>
+                <a href="./NotGirişi.php" class="w3-bar-item w3-button w3-mobile"><?php echo $page[1]; ?></a>
                 <input class="w3-bar-item w3-input w3-white w3-mobile" type="text" name="query" id="query" placeholder="🔍 Ara..." onkeyup="search(this.value)">
                 <span id="result"></span>
             </div>
         </center>
     </header>
 
+    <main style="display:flex;flex-wrap:wrap;justify-content:center;">
+        <?php
+        include "db.php";
+        $sql = "SELECT * FROM students WHERE dershane_id = " . $_SESSION["dershane_id"];
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+
+        foreach ($result as $row) {
+            echo "<p class='w3-card w3-margin w3-dark-grey w3-container w3-center w3-mobile w3-yellow w3-leftbar w3-rightbar w3-border-black' style='width: 20%;'>";
+            echo $row["Ad"];
+            echo "<br> Öğrenci Numarası:" . $row["ID"];
+            echo "<br> Notu: " . $row["notu"] . " ";
+            echo "</p>";
+        }
+        ?>
+    </main>
+
     <center>
-        <footer class="w3-display-bottommiddle">
+        <footer>
             <p>
                 <?php
                 if (isset($_SESSION["name"]) && isset($_SESSION["roles"]) && $_SESSION["roles"] == "1") {
-                    echo "Hoşgeldiniz, " . $_SESSION["name"] . "!";
+                    echo "Hoşgeldiniz, " . $_SESSION["name"] . " öğretmen!";
                 } else {
                     header("Location: error.php");
                 }

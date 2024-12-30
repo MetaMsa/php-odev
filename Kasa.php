@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giriş</title>
+    <title>Kasa</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="">
@@ -17,7 +17,7 @@
     }
 
     include "db.php";
-    $sql = "SELECT SUM(ücret) FROM students WHERE dershane_id = " . $_SESSION["dershane_id"];
+    $sql = "SELECT SUM(ucret) FROM students WHERE dershane_id = " . $_SESSION["dershane_id"];
     $stmt = $conn->prepare($sql);
     $stmt->execute();
     $result = $stmt->fetchAll();
@@ -57,7 +57,7 @@
     </header>
     <main>
         <center>
-            <h2>Gelir-Gider Dengesi</h2>
+            <h2 class="w3-margin w3-padding w3-red w3-xxlarge w3-serif">Gelir-Gider Dengesi</h2>
             <div class="chart-container" style="--income-percentage: 70;">
                 <div class="chart-incontainer w3-green">
                 </div>
@@ -92,7 +92,7 @@
                     $result = $stmt->fetchAll();
                     foreach ($result as $row) 
                     {
-                        echo "<div class='w3-text-white'> Öğrenci kayıt ücreti = " . $row["ücret"] . "&#8378;" . "</div>";
+                        echo "<div class='w3-text-white'> Öğrenci kayıt ücreti = " . $row["ucret"] . "&#8378;" . "</div>";
                     }
                     ?>
                 </p>

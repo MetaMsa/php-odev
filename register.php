@@ -16,27 +16,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (count($result) > 0) {
         header("Location: index.php?state=regerror");
     } else {
-        // Dershane adını dershaneler tablosuna ekleyin
-        $sql = "INSERT INTO dershaneler (name) VALUES (?)";
+        $sql = "SELECT * FROM dershaneler WHERE name = ?";
         $stmt = $conn->prepare($sql);
         $stmt->execute([$dershanead]);
+        $result1 = $stmt->fetchAll();
 
-        // Eklenen dershanenin ID'sini alın
-        $dershane_id = $conn->lastInsertId();
-        
-        if($roles == "1"){
-            $maas = 25000;
+        if (count($result1) > 0) {
+            $dershane_id = $result1[0]["ID"];
+            if ($roles == "1") {
+                $maas = 25000;
+            } else if ($roles == "2") {
+                $maas = 50000;
+            }
+            $sql = "INSERT INTO users (name, email, date, password, roles, dershane_id, maas) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([$username, $email, $date, $password, $roles, $dershane_id, $maas]);
+            header("Location: index.php?state=regsuccess");
+        } else {
+            // Dershane adını dershaneler tablosuna ekleyin
+            $sql = "INSERT INTO dershaneler (name) VALUES (?)";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([$dershanead]);
+
+            $dershane_id_1 = $conn->lastInsertId();
+
+            if ($roles == "1") {
+                $maas = 25000;
+            } else if ($roles == "2") {
+                $maas = 50000;
+            }
+
+            // Kullanıcıyı users tablosuna ekleyin
+            $sql = "INSERT INTO users (name, email, date, password, roles, dershane_id, maas) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([$username, $email, $date, $password, $roles, $dershane_id_1, $maas]);
+
+            header("Location: index.php?state=regsuccess");
         }
-        else if($roles == "2"){
-            $maas = 50000;
-        }
-
-        // Kullanıcıyı users tablosuna ekleyin
-        $sql = "INSERT INTO users (name, email, date, password, roles, dershane_id, maas) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        $stmt = $conn->prepare($sql);
-        $stmt->execute([$username, $email, $date, $password, $roles, $dershane_id, $maas]);
-
-        header("Location: index.php?state=regsuccess");
     }
 }
-?>
