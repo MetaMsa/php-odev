@@ -75,6 +75,8 @@
             for ($i = 0; $i < count($result1); $i++) {
                 echo "<br> Maaş Ödemelerim: ";
                 echo $result1[$i]['miktar'] . " ";
+                echo "<br> Ödeme Tarihi: ";
+                echo $result1[$i]['tarih'] . " ";
             }
             echo "</p>";
         }
