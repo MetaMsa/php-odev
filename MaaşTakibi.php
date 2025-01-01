@@ -23,13 +23,6 @@
     <p class="w3-margin w3-center w3-padding w3-red w3-xxlarge w3-serif">
         Maaş Takibi (<?php echo $_SESSION["roles"] == 1 ? "Öğretmen" : "Yönetici";  ?> Paneli)
     </p>
-    <?php
-    if ($_SESSION["roles"] == 2) {
-        echo "<p class='w3-margin w3-center w3-padding w3-red w3-serif'>
-            Sadece öğretmen maaşları düzenlebilir.
-        </p>";
-    }
-    ?>
     <main style="display:flex;flex-wrap:wrap;justify-content:center;">
         <?php
         include "db.php";
@@ -44,10 +37,15 @@
                 echo $row["name"];
                 echo "<br> Personel Numarası:" . $row["ID"];
                 echo "<br> Rolü: " . ($row["roles"] == 1 ? "Öğretmen" : "Yönetici");
-                echo "<br> Maaşı: " . $row["maas"] . "₺ ";
-                if ($row["roles"] == 1) {
-                    echo "<a href='maas.php?id=" . $row['ID'] . "' class='w3-button w3-red w3-border w3-border-black w3-round-large'><i class='fa fa-edit'></i></a>";
-                };
+                $sql = "SELECT * FROM maaslar WHERE userId = " .  $row["ID"];
+                $stmt = $conn->prepare($sql);
+                $stmt->execute();
+                $result1 = $stmt->fetchAll();
+                for ($i = 0; $i < count($result1); $i++) {
+                    echo "<br> Maaşı: ";
+                    echo $result1[$i]['miktar'] . " ";
+                }
+                echo "<br><br><a href='maas.php?id=" . $row["ID"] . "' class='w3-button w3-green w3-border w3-border-black w3-round-large'>+ Yeni maaş öde <i class='fa fa-money '></i></a>";
                 echo "</p>";
             }
 
@@ -58,8 +56,7 @@
                 $stmt->execute();
                 header("Location: MaaşTakibi.php");
             }
-        }
-        else{
+        } else {
             $sql = "SELECT * FROM users WHERE ID = ?";
             $stmt = $conn->prepare($sql);
             $stmt->execute([$_SESSION["ID"]]);
@@ -69,7 +66,14 @@
             echo "Adım:" . $result[0]['name'];
             echo "<br> Personel Numaram:" . $result[0]["ID"];
             echo "<br> Rolüm: " . ($result[0]["roles"] == 1 ? "Öğretmen" : "Yönetici");
-            echo "<br> Maaşım: " . $result[0]["maas"];
+            $sql = "SELECT * FROM maaslar WHERE userId = " .  $result[0]["ID"];
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            $result1 = $stmt->fetchAll();
+            for ($i = 0; $i < count($result1); $i++) {
+                echo "<br> Maaş Ödemelerim: ";
+                echo $result1[$i]['miktar'] . " ";
+            }
             echo "</p>";
         }
         ?>

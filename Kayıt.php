@@ -23,6 +23,9 @@
         <a href="./admin.php" class="w3-margin w3-bar-item w3-button w3-red"><i class="fa-solid fa-arrow-left"></i></a>
     </header>
     <main>
+        <p>
+            Türkçe karakterler kullanmayınız!
+        </p>
         <form class="w3-display-middle w3-topbar w3-bottombar w3-border-red" action="Kayıt.php" method="post" style="width: fit-content;">
             <label for="name">Adı</label><br>
             <input class="w3-input w3-hover-yellow w3-animate-input" type="text" name="name" id="name" style="width: 70%;" required><br>
@@ -78,6 +81,11 @@
             $stmt = $conn->prepare($sql);
             $stmt->execute([$name, $option, $ücret, $_SESSION["dershane_id"]]);
             echo "<div class='w3-display-bottommiddle w3-panel w3-green w3-border w3-border-red w3-round-large' style='width: fit-content;'><p>Kayıt başarılı!</p></div>";
+
+            $ogrenciId = $conn->lastInsertId();
+            $sql = "INSERT INTO notlar (ogrenciId, notu) VALUES (?, ?)";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([$ogrenciId, 0]);
         }
         ?>
     </main>

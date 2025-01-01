@@ -26,6 +26,9 @@
             <div class="w3-panel w3-red w3-xxlarge w3-serif"><i>Dershane İşlemleri Yönetim Sistemi</i></div>
         </header>
         <main>
+            <p>
+                Türkçe karakterler kullanmayınız!
+            </p>
             <div style="width: fit-content;" class="login w3-card-4 w3-border w3-border-black w3-round w3-animate-zoom" id="login">
                 <div class="w3-container w3-blue">
                     <h1>Giriş</h1>
@@ -43,8 +46,10 @@
                         <i class="fa-solid fa-right-to-bracket">
 
                         </i>
-                        Giriş Yap</button>
+                        Giriş Yap</button><br><br>
+                        <a href="sifreyenile.php">Şifremi Unuttum</a>
                 </form>
+                
                 <div class="error w3-red">
                     <?php
                     if (isset($_GET["state"]) && $_GET["state"] == "error") {
@@ -107,7 +112,7 @@
                 Kayıt Ol
             </button>
         </main>
-        <footer class="w3-display-bottommiddle w3-mobile w3-xlarge w3-serif w3-text-black">
+        <footer class="w3-mobile w3-xlarge w3-serif w3-text-black">
             Mehmet Serhat ASLAN
         </footer>
     </center>

@@ -35,20 +35,22 @@
         $result = $stmt->fetchAll();
 
         foreach ($result as $row) {
+            $Id = $row["ID"];
+            $count = 1;
             echo "<p class='w3-mobile w3-yellow w3-leftbar w3-rightbar w3-border-black' style='width: 20%;'>";
             echo "Adı:" . $row["Ad"];
             echo "<br> Öğrenci Numarası:" . $row["ID"];
-            echo "<br> Notu: " . $row["notu"] . " ";
-            echo "<a href='not.php?id=" . $row['ID'] . "' class='w3-button w3-red w3-border w3-border-black w3-round-large'><i class='fa fa-edit'></i></a>";
-            echo "</p>";
-        }
-
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $not = $_POST["notu"];
-            $sql = "UPDATE students SET not = " . $not . " WHERE ID = " . $row["ID"];
+            $sql = "SELECT * FROM notlar WHERE ogrenciId = " .  $Id;
             $stmt = $conn->prepare($sql);
             $stmt->execute();
-            header("Location: NotGirişi.php");
+            $result1 = $stmt->fetchAll();
+            for($i = 0; $i < count($result1) ; $i++){
+                echo "<br> Notu: " ;
+                echo $result1[$i]['notu'] . " ";
+                echo "<a href='not.php?id=" . $Id . "&notId=" . $result1[$i]['ID'] . "' class='w3-button w3-red w3-border w3-border-black w3-round-large'><i class='fa fa-edit'></i></a>";
+            }
+            echo "<br><a href='notekle.php?id=$Id' class='w3-button w3-white w3-border w3-border-black w3-round-large'><i class='fa fa-plus'></i>Not Ekle</a>";
+            echo "</p>";
         }
         ?>
     </main>

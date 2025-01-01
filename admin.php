@@ -43,13 +43,13 @@
                     <button class="w3-button">Öğrenci İşlemleri <i class="fa fa-caret-down"></i></button>
                     <div class="w3-dropdown-content w3-bar-content w3-bar-block w3-dark-grey">
                         <a href="./Kayıt.php" class="w3-bar-item w3-button w3-mobile"><?php echo $page[0]; ?></a>
-                        <a href="./Kasa.php" class="w3-bar-item w3-button w3-mobile"><?php echo $page[1]; ?></a>
                     </div>
                 </div>
                 <div class="w3-dropdown-hover w3-mobile">
-                    <button class="w3-button">Finansal İşlemler <i class="fa fa-caret-down"></i></button>
+                    <button class="w3-button">Finansal/İdari İşlemler <i class="fa fa-caret-down"></i></button>
                     <div class="w3-dropdown-content w3-bar-content w3-bar-block w3-dark-grey">
                         <a href="./Personel.php" class="w3-bar-item w3-button w3-mobile"><?php echo $page[2]; ?></a>
+                        <a href="./Kasa.php" class="w3-bar-item w3-button w3-mobile"><?php echo $page[1]; ?></a>
                         <a href="./MaaşTakibi.php" class="w3-bar-item w3-button w3-mobile"><?php echo $page[3]; ?></a>
                     </div>
                 </div>

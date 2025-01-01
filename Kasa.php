@@ -22,11 +22,21 @@
     $stmt->execute();
     $result = $stmt->fetchAll();
     $income = $result[0][0];
-    $sql = "SELECT SUM(maas) FROM users WHERE dershane_id = " . $_SESSION["dershane_id"];
+    $sql = "SELECT * FROM users WHERE dershane_id = " . $_SESSION["dershane_id"];
     $stmt = $conn->prepare($sql);
     $stmt->execute();
     $result = $stmt->fetchAll();
-    $outcome = $result[0][0];
+    $outcome = 0;
+    for($i = 0; $i < count($result) ; $i++){
+        $sql = "SELECT * FROM maaslar WHERE userId = " .  $result[$i]["ID"];
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $result1 = $stmt->fetchAll();
+        for($j = 0; $j < count($result1) ; $j++){
+            $outcome += $result1[$j]['miktar'];
+        }
+    }
+
     $income_percentage = $income / ($income + $outcome) * 100;
     $outcome_percentage = $outcome / ($income + $outcome) * 100;
     ?>
@@ -36,8 +46,10 @@
             width: 20rem;
             height: 20rem;
             border-radius: 50%;
-            background: conic-gradient(white 0% <?php echo $income_percentage; ?>%,
-                    black <?php echo $outcome_percentage; ?>% 100%);
+            background: conic-gradient(
+                rgb(255, 255, 255) 0deg <?php echo $income_percentage; ?>%,
+                rgb(0, 0, 0) 0deg <?php echo $outcome_percentage; ?>%
+            );
         }
 
         .chart-incontainer {
@@ -71,13 +83,14 @@
                 <h3 class="w3-text-black">Gider</h3>
                 <p><?php
                     include "db.php";
-                    $sql = "SELECT * FROM users WHERE dershane_id = " . $_SESSION["dershane_id"];
-                    $stmt = $conn->prepare($sql);
-                    $stmt->execute();
-                    $result = $stmt->fetchAll();
-                    foreach ($result as $row) 
-                    {
-                        echo "<div class='w3-text-black'> Maaş Ödemesi = " . $row["maas"] . "&#8378;" . "</div>";
+                    for($i = 0; $i < count($result) ; $i++){
+                        $sql = "SELECT * FROM maaslar WHERE userId = " .  $result[$i]["ID"];
+                        $stmt = $conn->prepare($sql);
+                        $stmt->execute();
+                        $result1 = $stmt->fetchAll();
+                        for($j = 0; $j < count($result1) ; $j++){
+                            echo "<div class='w3-text-black'> Maaş Ödemesi = " . $result1[$j]['miktar'] . "&#8378;" . "</div>";
+                        }
                     }
                     ?></p>
             </div>

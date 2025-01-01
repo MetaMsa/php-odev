@@ -40,16 +40,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $dershane_id_1 = $conn->lastInsertId();
 
-            if ($roles == "1") {
-                $maas = 25000;
-            } else if ($roles == "2") {
-                $maas = 50000;
-            }
-
             // Kullanıcıyı users tablosuna ekleyin
-            $sql = "INSERT INTO users (name, email, date, password, roles, dershane_id, maas) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO users (name, email, date, password, roles, dershane_id) VALUES (?, ?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
-            $stmt->execute([$username, $email, $date, $password, $roles, $dershane_id_1, $maas]);
+            $stmt->execute([$username, $email, $date, $password, $roles, $dershane_id_1]);
+
+            $user_id = $conn->lastInsertId();
+            
+            if ($roles == "1") {
+                $sql = "INSERT INTO ogretmenler (user_id, maas) VALUES (?, ?)";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute([$user_id, 25000]);
+            } else if ($roles == "2") {
+                $sql = "INSERT INTO mudurler (user_id, maas) VALUES (?, ?)";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute([$user_id, 50000]);
+            }
 
             header("Location: index.php?state=regsuccess");
         }
