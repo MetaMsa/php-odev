@@ -30,7 +30,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
             $sql = "INSERT INTO users (name, email, date, password, roles, dershane_id) VALUES (?, ?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
-            $stmt->execute([$username, $email, $date, $password, $roles, $dershane_id, $maas]);
+            $stmt->execute([$username, $email, $date, $password, $roles, $dershane_id]);
+
+            $user_id = $conn->lastInsertId();
+            
+            if ($roles == "1") {
+                $sql = "INSERT INTO users (user_id, maas) VALUES (?, ?)";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute([$user_id, 25000]);
+            } else if ($roles == "2") {
+                $sql = "INSERT INTO users (user_id, maas) VALUES (?, ?)";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute([$user_id, 50000]);
+            }
+
             header("Location: index.php?state=regsuccess");
         } else {
             // Dershane adını dershaneler tablosuna ekleyin
@@ -45,16 +58,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt = $conn->prepare($sql);
             $stmt->execute([$username, $email, $date, $password, $roles, $dershane_id_1]);
 
-            $user_id = $conn->lastInsertId();
+            $user_id1 = $conn->lastInsertId();
             
             if ($roles == "1") {
-                $sql = "INSERT INTO ogretmenler (user_id, maas) VALUES (?, ?)";
+                $sql = "INSERT INTO users (user_id, maas) VALUES (?, ?)";
                 $stmt = $conn->prepare($sql);
-                $stmt->execute([$user_id, 25000]);
+                $stmt->execute([$user_id1, 25000]);
             } else if ($roles == "2") {
-                $sql = "INSERT INTO mudurler (user_id, maas) VALUES (?, ?)";
+                $sql = "INSERT INTO users (user_id, maas) VALUES (?, ?)";
                 $stmt = $conn->prepare($sql);
-                $stmt->execute([$user_id, 50000]);
+                $stmt->execute([$user_id1, 50000]);
             }
 
             header("Location: index.php?state=regsuccess");
