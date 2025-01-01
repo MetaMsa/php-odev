@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else if ($roles == "2") {
                 $maas = 50000;
             }
-            $sql = "INSERT INTO users (name, email, date, password, roles, dershane_id, maas) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO users (name, email, date, password, roles, dershane_id) VALUES (?, ?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
             $stmt->execute([$username, $email, $date, $password, $roles, $dershane_id, $maas]);
             header("Location: index.php?state=regsuccess");
