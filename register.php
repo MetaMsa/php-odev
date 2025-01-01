@@ -35,11 +35,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $user_id = $conn->lastInsertId();
             
             if ($roles == "1") {
-                $sql = "INSERT INTO maaslar (userId, miktar, tarih) VALUES (?, ?)";
+                $sql = "INSERT INTO maaslar (userId, miktar, tarih) VALUES (?, ?, ?)";
                 $stmt = $conn->prepare($sql);
                 $stmt->execute([$user_id, 25000, date("Y-m-d")]);
             } else if ($roles == "2") {
-                $sql = "INSERT INTO maaslar (userId, miktar, tarih) VALUES (?, ?)";
+                $sql = "INSERT INTO maaslar (userId, miktar, tarih) VALUES (?, ?, ?)";
                 $stmt = $conn->prepare($sql);
                 $stmt->execute([$user_id, 50000, date("Y-m-d")]);
             }
@@ -61,11 +61,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $user_id1 = $conn->lastInsertId();
             
             if ($roles == "1") {
-                $sql = "INSERT INTO maaslar (userId, miktar, tarih) VALUES (?, ?)";
+                $sql = "INSERT INTO maaslar (userId, miktar, tarih) VALUES (?, ?, ?)";
                 $stmt = $conn->prepare($sql);
                 $stmt->execute([$user_id1, 25000, date("Y-m-d")]);
             } else if ($roles == "2") {
-                $sql = "INSERT INTO maaslar (userId, miktar, tarih) VALUES (?, ?)";
+                $sql = "INSERT INTO maaslar (userId, miktar, tarih) VALUES (?, ?, ?)";
                 $stmt = $conn->prepare($sql);
                 $stmt->execute([$user_id1, 50000, date("Y-m-d")]);
             }
