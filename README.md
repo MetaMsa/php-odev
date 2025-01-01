@@ -1,6 +1,6 @@
 # Ödev
 
-### Veritabanını Yükleme
+### Kurulum
 1. Projeyi klonlayın:
    ```bash
    git clone https://github.com/MetaMsa/php-odev.git
