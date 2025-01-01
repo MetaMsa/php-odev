@@ -42,8 +42,10 @@
                 $stmt->execute();
                 $result1 = $stmt->fetchAll();
                 for ($i = 0; $i < count($result1); $i++) {
-                    echo "<br> Maaşı: ";
+                    echo "<br> Maaş Ödemesi: ";
                     echo $result1[$i]['miktar'] . " ";
+                    echo "<br> Ödeme Tarihi: ";
+                    echo $result1[$i]['tarih'] . " ";
                 }
                 echo "<br><br><a href='maas.php?id=" . $row["ID"] . "' class='w3-button w3-green w3-border w3-border-black w3-round-large'>+ Yeni maaş öde <i class='fa fa-money '></i></a>";
                 echo "</p>";

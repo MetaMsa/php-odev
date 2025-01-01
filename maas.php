@@ -11,9 +11,9 @@ else{
         $stmt->execute();
         $result = $stmt->fetch();
 
-        $sql = "INSERT INTO maaslar (userId, miktar) VALUES (?, ?)";
+        $sql = "INSERT INTO maaslar (userId, miktar, tarih) VALUES (?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->execute([$_GET["id"], $result["roles"] == 1 ? 25000 : 50000]);
+        $stmt->execute([$_GET["id"], $result["roles"] == 1 ? 25000 : 50000, date("Y-m-d")]);
         header("Location: MaaşTakibi.php");
     }
 }
