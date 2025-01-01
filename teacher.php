@@ -54,19 +54,24 @@
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll();
-
-        foreach ($result as $row) {
-            echo "<p class='w3-card w3-margin w3-dark-grey w3-container w3-center w3-mobile w3-yellow w3-leftbar w3-rightbar w3-border-black' style='width: 20%;'>";
-            echo $row["Ad"];
-            echo "<br> Öğrenci Numarası:" . $row["ID"];
-            echo "<br> Notu: ";
-            $Id = $row["ID"];
-            $sql = "SELECT * FROM notlar WHERE ogrenciId = $Id";
-            $stmt = $conn->prepare($sql);
-            $stmt->execute();
-            $result1 = $stmt->fetchAll();
-            echo $result1[0]['notu'] . " ";
-            echo "</p>";
+        
+        if(count($result) == 0) {
+            echo "<p class='w3-card w3-margin w3-dark-grey w3-container w3-center w3-mobile w3-yellow w3-leftbar w3-rightbar w3-border-black' style='width: 20%;'>Öğrenci bulunamadı.</p>";
+        }
+        else{
+            foreach ($result as $row) {
+                echo "<p class='w3-card w3-margin w3-dark-grey w3-container w3-center w3-mobile w3-yellow w3-leftbar w3-rightbar w3-border-black' style='width: 20%;'>";
+                echo $row["Ad"];
+                echo "<br> Öğrenci Numarası:" . $row["ID"];
+                echo "<br> Notu: ";
+                $Id = $row["ID"];
+                $sql = "SELECT * FROM notlar WHERE ogrenciId = $Id";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute();
+                $result1 = $stmt->fetchAll();
+                echo $result1[0]['notu'] . " ";
+                echo "</p>";
+            }
         }
         ?>
     </main>
