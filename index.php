@@ -28,6 +28,9 @@
         <main>
             <p>
                 Türkçe karakterler kullanmayınız!
+
+                Yöneticiler öğrenci ekleyip silebilir ve personel maaşlarını düzenleyebilir.
+                Öğretmenler var olan öğrencilere not girebilir ve öğrenci notlarını görebilir.
             </p>
             <div style="width: fit-content;" class="login w3-card-4 w3-border w3-border-black w3-round w3-animate-zoom" id="login">
                 <div class="w3-container w3-blue">
