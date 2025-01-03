@@ -9,6 +9,6 @@
    cd php-odev
 2. Veritabanınızı yapılandırın:
     ```bash
-    mysql -u root -p if0_37485059_odev < if0_37485059_odev.sql
+    mysql -u root -p "<" if0_37485059_odev.sql
 ###
 https://phpodev.byethost12.com
