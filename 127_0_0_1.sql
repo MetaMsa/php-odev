@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 03 Oca 2025, 18:32:36
+-- Üretim Zamanı: 03 Oca 2025, 19:15:43
 -- Sunucu sürümü: 10.4.32-MariaDB
 -- PHP Sürümü: 8.2.12
 
@@ -419,7 +419,7 @@ CREATE TABLE `pma__recent` (
 --
 
 INSERT INTO `pma__recent` (`username`, `tables`) VALUES
-('root', '[{\"db\":\"a\",\"table\":\"users\"},{\"db\":\"a\",\"table\":\"students\"},{\"db\":\"a\",\"table\":\"notlar\"},{\"db\":\"a\",\"table\":\"maaslar\"},{\"db\":\"a\",\"table\":\"dershaneler\"},{\"db\":\"if0_37485059_odev\",\"table\":\"users\"},{\"db\":\"if0_37485059_odev\",\"table\":\"maaslar\"},{\"db\":\"if0_37485059_odev\",\"table\":\"notlar\"},{\"db\":\"if0_37485059_odev\",\"table\":\"students\"},{\"db\":\"if0_37485059_odev\",\"table\":\"dershaneler\"}]');
+('root', '[{\"db\":\"a\",\"table\":\"dershaneler\"},{\"db\":\"a\",\"table\":\"a\"},{\"db\":\"a\",\"table\":\"b\"},{\"db\":\"a\",\"table\":\"users\"},{\"db\":\"a\",\"table\":\"students\"},{\"db\":\"a\",\"table\":\"notlar\"},{\"db\":\"a\",\"table\":\"maaslar\"},{\"db\":\"if0_37485059_odev\",\"table\":\"users\"},{\"db\":\"if0_37485059_odev\",\"table\":\"maaslar\"},{\"db\":\"if0_37485059_odev\",\"table\":\"notlar\"}]');
 
 -- --------------------------------------------------------
 
@@ -534,7 +534,7 @@ CREATE TABLE `pma__userconfig` (
 --
 
 INSERT INTO `pma__userconfig` (`username`, `timevalue`, `config_data`) VALUES
-('root', '2025-01-03 17:32:23', '{\"Console\\/Mode\":\"collapse\",\"lang\":\"tr\"}');
+('root', '2025-01-03 18:15:25', '{\"Console\\/Mode\":\"collapse\",\"lang\":\"tr\"}');
 
 -- --------------------------------------------------------
 
